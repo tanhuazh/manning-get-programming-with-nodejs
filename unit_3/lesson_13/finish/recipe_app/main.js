@@ -15,7 +15,8 @@ const express = require("express"),
   // mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10255/admin?ssl=true
   // escape / as %2F
   // port changes to 10250
-  dbURL = "mongodb://localhost:C2y6yDjf5%2FR+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw%2FJw==@localhost:10250/admin?ssl=true",
+  // mongodb://username:password@host:port/database?options...
+  dbURL = "mongodb://localhost:C2y6yDjf5%2FR+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw%2FJw==@localhost:10250/recipe_db?ssl=true",
   dbName = "recipe_db";
 
 var options = {
