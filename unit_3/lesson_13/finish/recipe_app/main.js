@@ -6,11 +6,27 @@ const express = require("express"),
   homeController = require("./controllers/homeController"),
   layouts = require("express-ejs-layouts"),
   MongoDB = require("mongodb").MongoClient,
-  dbURL = "mongodb://localhost:27017",
+  // start emulator in administrator
+  // CosmosDB.Emulator.exe /EnableMongoDbEndpoint /DataPath=%LOCALAPPDATA%\CosmosDbEmulator
+  // https://docs.mongodb.com/manual/reference/connection-string/
+  // If the username or password includes the at sign @, colon :, slash /,
+  // or the percent sign % character, use percent encoding
+  // original connection string : 
+  // mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10255/admin?ssl=true
+  // escape / as %2F
+  // port changes to 10250
+  dbURL = "mongodb://localhost:C2y6yDjf5%2FR+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw%2FJw==@localhost:10250/admin?ssl=true",
   dbName = "recipe_db";
+
+var options = {
+  replSet: {
+      sslValidate: false
+    }
+  };
 
 MongoDB.connect(
   dbURL,
+  options,
   (error, client) => {
     if (error) throw error;
     let db = client.db(dbName);
