@@ -9,10 +9,18 @@ const express = require("express"),
   mongoose = require("mongoose"),
   Subscriber = require("./models/subscriber");
 
+var options = {
+  replSet: {
+    sslValidate: false
+  },
+  useNewUrlParser: true
+};
+
 mongoose.connect(
-  "mongodb://localhost:27017/recipe_db",
-  { useNewUrlParser: true }
+  "mongodb://localhost:C2y6yDjf5%2FR+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw%2FJw==@localhost:10250/admin?ssl=true",
+  options
 );
+
 mongoose.set("useCreateIndex", true);
 const db = mongoose.connection;
 
@@ -44,6 +52,7 @@ app.use(homeController.logRequestPaths);
 app.get("/name", homeController.respondWithName);
 app.get("/items/:vegetable", homeController.sendReqParam);
 
+// a list of handlers
 app.get("/subscribers", subscribersController.getAllSubscribers, (req, res, next) => {
   res.render("subscribers", { subscribers: req.data });
 });
