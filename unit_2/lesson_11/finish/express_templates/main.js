@@ -28,6 +28,10 @@ app.post("/", (req, res) => {
   res.send("POST Successful!");
 });
 
+app.get("/", (req, res) => {
+  throw "error"
+})
+
 app.use(errorController.logErrors);
 app.use(errorController.respondNoResourceFound);
 app.use(errorController.respondInternalError);
