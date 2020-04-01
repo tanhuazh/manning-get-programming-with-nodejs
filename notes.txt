@@ -41,5 +41,17 @@ var options = {
 * mongoose model
 
   export a model from "mongoose", the model will be scoped to Mongoose's default connection.
+  
+* session
+
+  https://stormpath.com/blog/everything-you-ever-wanted-to-know-about-node-dot-js-sessions
+  https://stormpath.com/blog/where-to-store-your-jwts-cookies-vs-html5-web-storage
+  
+* web security
+
+  https://www.tutorialspoint.com/security_testing/testing_cross_site_scripting.htm
+  https://www.tutorialspoint.com/security_testing/cross_site_request_forgery.htm
+  
+  
 
 
