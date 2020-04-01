@@ -12,10 +12,24 @@ const express = require("express"),
   mongoose = require("mongoose"),
   methodOverride = require("method-override");
 
+require('dotenv').config();
+
+app.set("port", process.env.PORT || 3000);
+app.set("view engine", "ejs");
+app.set("connectionString", process.env.CONNECTIONSTRING || "mongodb://localhost:27017/recipe_db")
+
+var options = {
+  replSet: {
+    sslValidate: false
+  },
+  useNewUrlParser: true
+};
+
 mongoose.connect(
-  "mongodb://localhost:27017/confetti_cuisine",
-  { useNewUrlParser: true }
+  app.get("connectionString"),
+  options
 );
+
 mongoose.set("useCreateIndex", true);
 
 app.set("port", process.env.PORT || 3000);
