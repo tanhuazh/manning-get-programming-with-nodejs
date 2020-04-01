@@ -1,0 +1,45 @@
+* connect to Azure Cosmos Emulator
+
+  "c:\Program Files\Azure Cosmos DB Emulator\CosmosDB.Emulator.exe" /EnableMongoDbEndpoint /DataPath=%LOCALAPPDATA%\CosmosDbEmulator
+  
+* mongodb connection string
+
+  mongodb://username:password@host:port/database?options...
+  
+  If the username or password includes the at sign @, colon :, slash /, or the percent sign % character, use percent encoding
+  
+  / ----> %2F
+  @ ----> %40
+  
+  for Azure Cosmos Emulator connection string
+  mongodb://localhost:C2y6yDjf5%2FR+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw%2FJw==@localhost:10250/recipe_db?ssl=true
+  username    -----> localhost
+  password    -----> C2y6yDjf5%2FR+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw%2FJw==
+              -----> / encode as %2F
+  host        -----> localhost
+  port        -----> 10250
+  database    -----> recipe_db
+  
+* if there is certificate error when connect to database, use the following options
+
+var options = {
+  replSet: {
+      sslValidate: false
+    }
+  };
+  
+* mongoose connection management
+
+	https://mongoosejs.com/docs/connections.html
+
+	If initial connection fails, Mongoose will not attempt to reconnect
+	Error after initial connection was established. Mongoose will attempt to reconnect
+
+	mongoose.connect() creates default connection mongoose.connection, it is a pool of socket connections
+	mongoose.createConnection() creates new connection(a pool of socket connections)
+	
+* mongoose model
+
+  export a model from "mongoose", the model will be scoped to Mongoose's default connection.
+
+

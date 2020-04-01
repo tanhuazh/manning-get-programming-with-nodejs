@@ -13,9 +13,30 @@ const express = require("express"),
   Subscriber = require("./models/subscriber");
 mongoose.Promise = global.Promise;
 
+require('dotenv').config();
+
+app.set("port", process.env.PORT || 3000);
+app.set("view engine", "ejs");
+app.set("connectionString", process.env.CONNECTIONSTRING || "mongodb://localhost:27017/recipe_db")
+
+// https://mongoosejs.com/docs/connections.html
+
+// If initial connection fails, Mongoose will not attempt to reconnect
+// Error after initial connection was established. Mongoose will attempt to reconnect
+
+// mongoose.connect() creates default connection mongoose.connection, it is a pool of socket connections
+// mongoose.createConnection() creates new connection(a pool of socket connections)
+
+var options = {
+  replSet: {
+    sslValidate: false
+  },
+  useNewUrlParser: true
+};
+
 mongoose.connect(
-  "mongodb://localhost:27017/recipe_db",
-  { useNewUrlParser: true }
+  app.get("connectionString"),
+  options
 );
 mongoose.set("useCreateIndex", true);
 
@@ -24,9 +45,6 @@ const db = mongoose.connection;
 db.once("open", () => {
   console.log("Successfully connected to MongoDB using Mongoose!");
 });
-
-app.set("port", process.env.PORT || 3000);
-app.set("view engine", "ejs");
 
 router.use(express.static("public"));
 router.use(layouts);

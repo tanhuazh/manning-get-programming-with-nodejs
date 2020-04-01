@@ -64,4 +64,6 @@ userSchema.pre("save", function(next) {
   }
 });
 
+// export a model from "mongoose"
+// the model will be scoped to Mongoose's default connection.
 module.exports = mongoose.model("User", userSchema);
